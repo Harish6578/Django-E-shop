@@ -1,0 +1,11 @@
+from django.db import models
+
+# Create your models here.
+
+
+class CarouselImage(models.Model):
+    img = models.ImageField(upload_to='carousal_images/')
+    title = models.CharField(max_length=200)
+    caption = models.TextField(max_length=400)
+    link = models.CharField(max_length=200)
+    active = models.BooleanField(default=False)
