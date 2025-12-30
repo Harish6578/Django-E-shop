@@ -118,3 +118,21 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS =[
+    BASE_DIR /"static",
+]
+
+# User-uploaded media 
+# This directs django on where to store the user uploaded media
+# FOr exmple, thew ImageField datafields of any models will be stored in the 
+# configured or server path here. The 'upload_to
+# gives the sub_folder name to be cerated to store the data.
+# For developement purpose, we are, for now, using a folder within the 
+# Django project folder (BASE_DIR)called `media` for emulating a media 
+# server . this folder will be created  automatically when the first 
+# records id added. the relative path of the media will be stored in SQL
+# as VARCHAR().
+
+
+MEDIA_ROOT = BASE_DIR/'media'
+MEDIA_URL = '/'
