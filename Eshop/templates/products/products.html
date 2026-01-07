@@ -6,7 +6,13 @@ Product
 
 
 {% block content %}
+
 <section id='products-container'>
-dfrsdut
+    <div class="row g-5 p-5">
+        {% for product in products %}
+
+        {% include 'products/includes/productsCard.html' %}
+        {% endfor %}
+    </div>
 </section>
 {% endblock %}

@@ -6,7 +6,9 @@ from .models import Product
 def productsView(request):
     template = 'products/products.html'
     context ={
-        'products' : 'Product'
+        'current_page' : 'Product',
+        'products' : Product.objects.all()
     }
 
     return render(request,template_name=template,context=context)
+
