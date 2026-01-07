@@ -10,6 +10,5 @@ class CarouselImage(models.Model):
     link = models.CharField(max_length=200)
     active = models.BooleanField(default=False)
 
-
-def __str__(self):
-    return f"Carousal Image : {self.title}"
+    def __str__(self):
+        return f"Carousal Image : {self.title}"
