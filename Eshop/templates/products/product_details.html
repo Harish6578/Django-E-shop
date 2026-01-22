@@ -1,0 +1,38 @@
+{% extends 'base/base.html' %}
+
+{% block title %}
+Product Details
+{% endblock %}
+
+{% block content %}
+<section class="d-flex row ">
+    <div id="carouselExample" class="carousel slide col" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            {% for image in product.images.all %}
+            <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %}">
+                <img src="{{image.img.url}}" alt="" class="w-100 object-fit-cover">
+            </div>
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+    <div >
+        <img src="{{product.thumbnail.url}}" class="w-75" alt="">
+        <h2>{{product.title}}</h2>
+        <p>{{product.desc}}</p>
+        <p>{{product.price}}</p>
+        <a href="" class="btn ">Add to Cart</a>
+        <div class="d-flex flex-row mt-3">
+            <a href="{% url 'edit_product' product.pk %}" class="btn">Edit</a>
+            <a href="{% url 'delete_product' product.pk %}" class="btn">Delete</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
