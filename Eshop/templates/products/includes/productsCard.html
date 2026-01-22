@@ -1,11 +1,13 @@
 <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-    <div class="card">
-        <img src="{{product.thumbnail.url}}" class="card-img-top" alt="Products">
-        <div class="card-body">
-            <h5 class="card-title">{{product.title}}</h5>
-            <p class="card-text">{{product.desc}}</p>
-            <h2 class="amount text-success">₹ {{product.price}}</h2>
-            <a href="#" class="btn btn-primary">Add to Cart</a>
+    <a href="{% url 'product_details' product.pk %}">
+        <div class="card">
+            <img src="{{product.thumbnail.url}}" class="card-img-top" alt="Products">
+            <div class="card-body">
+                <h5 class="card-title">{{product.title}}</h5>
+                <p class="card-text">{{product.desc}}</p>
+                <h2 class="amount text-success">₹ {{product.price}}</h2>
+                <a href="#" class="btn btn-primary">Add to Cart</a>
+            </div>
         </div>
-    </div>
-</div>  
+    </a>
+</div>

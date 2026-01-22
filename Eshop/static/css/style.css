@@ -1,3 +1,24 @@
-body{
-    /* display: none; */
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    main {
+        .sec {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .productadd {
+                background-color: black;
+                color: white;
+            }
+        }
+        .productdetails{
+            /* display:flex; */
+           
+        }
+    }
 }

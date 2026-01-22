@@ -23,16 +23,16 @@ Product Details
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-    <div >
+    <div class="productdetails" >
         <img src="{{product.thumbnail.url}}" class="w-75" alt="">
         <h2>{{product.title}}</h2>
         <p>{{product.desc}}</p>
         <p>{{product.price}}</p>
         <a href="" class="btn ">Add to Cart</a>
-        <div class="d-flex flex-row mt-3">
+        <div class="d-flex flex-row mt-3 mb-5">
             <a href="{% url 'edit_product' product.pk %}" class="btn">Edit</a>
             <a href="{% url 'delete_product' product.pk %}" class="btn">Delete</a>
         </div>
     </div>
 </section>
-{% endblock %}
+{% endblock %} 
