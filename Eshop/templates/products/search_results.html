@@ -10,9 +10,11 @@ Search Result For {{query}}
 </h2>
 
 <section>
+    {% for product in products %}
     <div>
         {% include 'products/includes/productsCard.html' %}
     </div>
+    {% endfor %}
 </section>
 
 {% endblock %}
