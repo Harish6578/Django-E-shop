@@ -29,4 +29,4 @@ def searchProducts(request):
             'products':search_results
         }
 
-    return render(request, template_name=template, context = context)
+    return render(request, template_name=template,context=context)
