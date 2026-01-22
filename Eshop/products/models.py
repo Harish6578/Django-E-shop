@@ -7,3 +7,4 @@ class Product(models.Model):
     price = models.PositiveIntegerField()
     stock = models.PositiveIntegerField()
     thumbnail = models.ImageField(upload_to='products/thumbnails/')
+    

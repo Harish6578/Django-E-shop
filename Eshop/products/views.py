@@ -12,3 +12,22 @@ def productsView(request):
 
     return render(request,template_name=template,context=context)
 
+# Search product 
+
+from django.db.models import Q
+def searchProducts(request):
+    template = 'products/search_results.html'
+    query = request.GET.get('query_text')
+    if query:
+        search_results = Product.object.filter(
+            Q(title__icontains = query),
+            Q(desc__icontains = query)
+        )
+
+        context = {
+            'query':query,
+            'products':search_results
+        }
+
+    return render(request, template_name=template, context = context)
+
