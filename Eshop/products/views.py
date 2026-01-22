@@ -19,8 +19,8 @@ def searchProducts(request):
     template = 'products/search_results.html'
     query = request.GET.get('query_text')
     if query:
-        search_results = Product.object.filter(
-            Q(title__icontains = query),
+        search_results = Product.objects.filter(
+            Q(title__icontains = query) |
             Q(desc__icontains = query)
         )
 
@@ -30,4 +30,3 @@ def searchProducts(request):
         }
 
     return render(request, template_name=template, context = context)
-
