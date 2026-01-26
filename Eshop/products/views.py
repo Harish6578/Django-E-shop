@@ -40,16 +40,37 @@ class CreateProduct(CreateView):
     fields = '__all__'
     success_url = '/'
 
-class ProductDetail(DetailView):
+
+class AddProductImage(CreateView):
+    model=Product
+    template_name='products/add_product.html'
+    fields='__all__'
+    #redirection url for successful creation of resourecs
+    success_url='/'
+
+
+from django.views.generic.edit import FormMixin
+# this mixin provides ability to render forms from the `from_class`
+from .forms import ProductImageForm
+
+class ProductDetail(FormMixin,DetailView):
     model= Product
     template_name='products/product_details.html'
     context_object_name = 'product'
+    # providing form class for product image
+    form_class = ProductImageForm
 
     # Overriding the queryset to pre-fetch and add the product images alongside products
     def get_queryset(self):
         return Product.objects.prefetch_related('images')
+    
 
+    def get(self, request, *args, **kwargs):
+        context= super().get(request, *args, **kwargs)
+        context['adcd']= 'yuhooo'
 
+        return context
+    
 class UpdateProduct(UpdateView):
     model= Product
     template_name='products/update_product.html'
