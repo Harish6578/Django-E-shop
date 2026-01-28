@@ -5,41 +5,55 @@ Product Details
 {% endblock %}
 
 {% block content %}
-<section class="d-flex row ">
+<section class="d-flex row productdetails">
     <div class="col">
-        <div id="carouselExample" class="carousel slide col" data-bs-ride="carousel">
+        <div id="carouselExample" class="carousel slide position-relative" data-bs-ride="carousel">
+
+            <!-- Buttons -->
+
+
             <div class="carousel-inner">
                 {% for image in product.images.all %}
                 <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %}">
-                    <img src="{{image.img.url}}" alt="" class="w-100 object-fit-cover">
+
+                    <div class="carousel-buttons">
+                        <a href="{% url 'edit_prod_image' image.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                        <a href="{% url 'del_prod_image' image.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                    </div>
+
+                    <img src="{{ image.img.url }}" alt="" class="w-100 object-fit-cover">
                 </div>
                 {% endfor %}
             </div>
+
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
+                <span class="carousel-control-prev-icon"></span>
             </button>
+
             <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
+                <span class="carousel-control-next-icon"></span>
             </button>
         </div>
     </div>
+
     <div class="col productdetails">
-        <img src="{{product.thumbnail.url}}" class="w-75" alt="">
+        <img src="{{product.thumbnail.url}}" class="w-75 " alt="" style="height: 500px;">
         <h2>{{product.title}}</h2>
         <p>{{product.desc}}</p>
         <p>{{product.price}}</p>
         <a href="" class="btn btn-primary">Add to Cart</a>
-        <div class="d-flex flex-row mt-3 mb-5">
+        <div class="d-flex flex-row mt-3 mb-5 " style="gap: 10px;">
             <a href="{% url 'edit_product' product.pk %}" class="btn btn-warning">Edit</a>
             <a href="{% url 'delete_product' product.pk %}" class="btn btn-danger">Delete</a>
         </div>
     </div>
 </section>
 
-<section>
-    {% csrf_token %}
-{{ form.as_p }}
+<section class="mb-5 ms-5">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-outline-success">Upload</button>
+    </form>
 </section>
 {% endblock %}

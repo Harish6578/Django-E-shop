@@ -11,8 +11,9 @@ Delete Product
             {% csrf_token %}
             {{form.as_p}}
             <h2>Confirm delete the {{product.title}}!!!</h2>
-            <button type="submit">Delete Product</button>
+            <button type="submit" class="btn btn-danger">Delete Product</button>
         </form>
     </div>
 </section>
 {% endblock %}
+
