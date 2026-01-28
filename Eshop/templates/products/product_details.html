@@ -37,12 +37,12 @@ Product Details
     </div>
 
     <div class="col productdetails">
-        <img src="{{product.thumbnail.url}}" class="w-75 " alt="" style="height: 500px;">
+        <img src="{{product.thumbnail.url}}" class="w-75 " alt="" style="border-radius: 20px;" >
         <h2>{{product.title}}</h2>
         <p>{{product.desc}}</p>
         <p>{{product.price}}</p>
         <a href="" class="btn btn-primary">Add to Cart</a>
-        <div class="d-flex flex-row mt-3 mb-5 " style="gap: 10px;">
+        <div class="d-flex flex-row mt-3 mb-5 " style="gap:10px;">
             <a href="{% url 'edit_product' product.pk %}" class="btn btn-warning">Edit</a>
             <a href="{% url 'delete_product' product.pk %}" class="btn btn-danger">Delete</a>
         </div>
