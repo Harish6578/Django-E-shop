@@ -37,13 +37,18 @@ main {
         justify-content: space-between;
         z-index: 10;
     }
-/* Root card */
+
+    /* =========================
+   PRODUCT CARD – FIXED
+========================= */
+
 .card {
     position: relative;
     background: #0f0f0f;
     border-radius: 18px;
     overflow: hidden;
     isolation: isolate;
+    border: 1.5px solid #5a4bff; /* fallback */
     transition: transform 0.45s cubic-bezier(.21,1,.21,1);
 }
 
@@ -67,6 +72,7 @@ main {
         linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
     mask-composite: exclude;
+    pointer-events: none;
     z-index: 1;
 }
 
@@ -76,13 +82,17 @@ main {
     100% { background-position: 0% 50%; }
 }
 
-/* Lift + magnetic feel */
+/* Hover lift */
 .card:hover {
     transform: translateY(-10px) scale(1.03);
 }
 
-/* Image */
-.card-img-top {
+/* =========================
+   IMAGE
+========================= */
+
+.card-img-top,
+.product-image img {
     height: 230px;
     object-fit: contain;
     padding: 20px;
@@ -90,16 +100,21 @@ main {
     transition: transform 0.5s ease;
 }
 
-.card:hover .card-img-top {
+.card:hover .card-img-top,
+.card:hover .product-image img {
     transform: scale(1.12) rotate(-1deg);
 }
 
-/* Body */
+/* =========================
+   CARD BODY
+========================= */
+
 .card-body {
     position: relative;
     padding: 18px;
     background: rgba(255, 255, 255, 0.02);
     backdrop-filter: blur(6px);
+    z-index: 2;
 }
 
 /* Title */
@@ -127,7 +142,7 @@ main {
     overflow: hidden;
 }
 
-/* Price – neon glow */
+/* Price */
 .amount {
     font-size: 20px;
     font-weight: 900;
@@ -136,7 +151,10 @@ main {
     margin-bottom: 14px;
 }
 
-/* CTA button */
+/* =========================
+   BUTTON
+========================= */
+
 .card .btn-primary {
     position: relative;
     width: 100%;
@@ -148,14 +166,18 @@ main {
     color: #fff;
     overflow: hidden;
     transition: all 0.4s ease;
+    z-index: 2;
 }
 
-/* Liquid hover wave */
 .card .btn-primary::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(circle, rgba(255,255,255,0.35), transparent 70%);
+    background: radial-gradient(
+        circle,
+        rgba(255,255,255,0.35),
+        transparent 70%
+    );
     opacity: 0;
     transition: opacity 0.4s ease;
 }
@@ -168,7 +190,10 @@ main {
     box-shadow: 0 0 25px rgba(90, 75, 255, 0.7);
 }
 
-/* Floating futuristic tag */
+/* =========================
+   TAG
+========================= */
+
 .card::after {
     content: "LIMITED";
     position: absolute;
@@ -181,13 +206,348 @@ main {
     font-weight: 900;
     padding: 4px 40px;
     letter-spacing: 1px;
-    z-index: 2;
+    z-index: 3;
+    pointer-events: none;
 }
 
-/* Mobile */
+/* =========================
+   MOBILE
+========================= */
+
 @media (max-width: 576px) {
-    .card-img-top {
+    .card-img-top,
+    .product-image img {
         height: 190px;
+    }
+}
+/* ==============================
+   EDIT PRODUCT – LAYOUT
+================================ */
+
+.edit-section {
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    background: linear-gradient(135deg, #0e0e0e, #050505);
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ==============================
+   FORM CONTAINER
+================================ */
+
+.edit-product-box {
+    width: 100%;
+    max-width: 540px;
+    padding: 30px;
+    border-radius: 22px;
+    background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow:
+        0 30px 70px rgba(0,0,0,0.65),
+        inset 0 0 0 1px rgba(255,255,255,0.04);
+    animation: formReveal .7s ease;
+}
+
+@keyframes formReveal {
+    from {
+        opacity: 0;
+        transform: translateY(25px) scale(.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ==============================
+   TITLE
+================================ */
+
+.edit-title {
+    text-align: center;
+    font-size: 22px;
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: 26px;
+    letter-spacing: .6px;
+}
+
+/* ==============================
+   DJANGO FORM FIELDS
+================================ */
+
+.edit-form p {
+    margin-bottom: 16px;
+}
+
+.edit-form label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #bfbfbf;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+.edit-form input,
+.edit-form textarea,
+.edit-form select {
+    width: 100%;
+    padding: 11px 14px;
+    border-radius: 14px;
+    background: rgba(0,0,0,0.55);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #ffffff;
+    font-size: 13px;
+    transition: border .3s ease, box-shadow .3s ease;
+}
+
+.edit-form textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.edit-form input::placeholder,
+.edit-form textarea::placeholder {
+    color: #777;
+}
+
+.edit-form input:focus,
+.edit-form textarea:focus,
+.edit-form select:focus {
+    outline: none;
+    border-color: #00ffd5;
+    box-shadow: 0 0 0 2px rgba(0,255,213,0.35);
+}
+
+/* ==============================
+   BUTTON AREA
+================================ */
+
+.form-actions {
+    display: flex;
+    gap: 14px;
+    margin-top: 26px;
+}
+
+/* Update Button */
+.updateButton {
+    flex: 1;
+    padding: 13px 0;
+    border-radius: 16px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 900;
+    letter-spacing: .6px;
+    background: linear-gradient(135deg, #00ffd5, #5a4bff);
+    color: #000;
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.updateButton:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 28px rgba(90,75,255,0.85);
+}
+
+/* Cancel Button */
+.cancelButton {
+    flex: 1;
+    padding: 13px 0;
+    border-radius: 16px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 800;
+    text-decoration: none;
+    color: #ff4ecd;
+    border: 2px solid #ff4ecd;
+    transition: background .3s ease, color .3s ease, box-shadow .3s ease;
+}
+
+.cancelButton:hover {
+    background: #ff4ecd;
+    color: #000;
+    box-shadow: 0 0 20px rgba(255,78,205,0.7);
+}
+
+/* ==============================
+   MOBILE
+================================ */
+
+@media (max-width: 480px) {
+    .edit-product-box {
+        padding: 24px;
+    }
+
+    .edit-title {
+        font-size: 20px;
+    }
+
+    .form-actions {
+        flex-direction: column;
+    }
+}
+/* ===============================
+   PRODUCT DETAILS CONTAINER
+================================ */
+
+.product-details-box {
+    max-width: 560px;
+    margin: 40px auto;
+    padding: 26px;
+    border-radius: 26px;
+    background:
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow:
+        0 35px 80px rgba(0,0,0,0.7),
+        inset 0 0 0 1px rgba(255,255,255,0.05);
+    animation: productFade .6s ease;
+}
+
+@keyframes productFade {
+    from {
+        opacity: 0;
+        transform: translateY(24px) scale(.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ===============================
+   PRODUCT IMAGE
+================================ */
+
+.product-details-image {
+    display: block;
+    width: 100%;
+    max-height: 320px;
+    object-fit: contain;
+    padding: 22px;
+    border-radius: 22px;
+    background: radial-gradient(circle at top, #1b1b1b, #000);
+    margin-bottom: 22px;
+    transition: transform .5s ease;
+}
+
+.product-details-image:hover {
+    transform: scale(1.06) rotate(-0.5deg);
+}
+
+/* ===============================
+   TEXT CONTENT
+================================ */
+
+.product-details-title {
+    font-size: 24px;
+    font-weight: 900;
+    color: #ffffff;
+    margin-bottom: 12px;
+    letter-spacing: .6px;
+}
+
+.product-details-desc {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #cfcfcf;
+    margin-bottom: 18px;
+}
+
+.product-details-price {
+    font-size: 22px;
+    font-weight: 900;
+    color: #00ffd5;
+    text-shadow: 0 0 12px rgba(0,255,213,.7);
+    margin-bottom: 22px;
+}
+
+/* ===============================
+   ADD TO CART BUTTON
+================================ */
+
+.add-to-cart-btn {
+    display: block;
+    width: 100%;
+    padding: 14px 0;
+    text-align: center;
+    border-radius: 18px;
+    font-size: 15px;
+    font-weight: 900;
+    letter-spacing: .6px;
+    color: #000;
+    background: linear-gradient(135deg, #00ffd5, #5a4bff);
+    text-decoration: none;
+    transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.add-to-cart-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 30px rgba(90,75,255,0.9);
+}
+
+/* ===============================
+   ACTION BUTTONS
+================================ */
+
+.product-action-buttons {
+    display: flex;
+    gap: 14px;
+    margin-top: 26px;
+}
+
+.edit-btn,
+.delete-btn {
+    flex: 1;
+    padding: 12px 0;
+    border-radius: 16px;
+    text-align: center;
+    font-size: 14px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: all .3s ease;
+}
+
+/* Edit */
+.edit-btn {
+    background: #ffc107;
+    color: #000;
+}
+
+.edit-btn:hover {
+    box-shadow: 0 0 20px rgba(255,193,7,0.8);
+    transform: translateY(-2px);
+}
+
+/* Delete */
+.delete-btn {
+    background: #ff4d4d;
+    color: #000;
+}
+
+.delete-btn:hover {
+    box-shadow: 0 0 20px rgba(255,77,77,0.8);
+    transform: translateY(-2px);
+}
+
+/* ===============================
+   MOBILE
+================================ */
+
+@media (max-width: 480px) {
+    .product-details-box {
+        padding: 20px;
+    }
+
+    .product-details-title {
+        font-size: 21px;
     }
 }
 

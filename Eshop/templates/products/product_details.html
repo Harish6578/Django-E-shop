@@ -36,7 +36,7 @@ Product Details
         </div>
     </div>
 
-    <div class="col productdetails">
+    <!-- <div class="col productdetails">
         <img src="{{product.thumbnail.url}}" class="w-75 " alt="" style="border-radius: 20px;" >
         <h2>{{product.title}}</h2>
         <p>{{product.desc}}</p>
@@ -45,6 +45,29 @@ Product Details
         <div class="d-flex flex-row mt-3 mb-5 " style="gap:10px;">
             <a href="{% url 'edit_product' product.pk %}" class="btn btn-warning">Edit</a>
             <a href="{% url 'delete_product' product.pk %}" class="btn btn-danger">Delete</a>
+        </div>
+    </div> -->
+    <div class="col product-details-box">
+        <img src="{{ product.thumbnail.url }}" alt="{{ product.title }}" class="product-details-image">
+        <h2 class="product-details-title">
+            {{ product.title }}
+        </h2>
+        <p class="product-details-desc">
+            {{ product.desc }}
+        </p>
+        <p class="product-details-price">
+            {{ product.price }}
+        </p>
+        <a href="#" class="add-to-cart-btn">
+            Add to Cart
+        </a>
+        <div class="product-action-buttons">
+            <a href="{% url 'edit_product' product.pk %}" class="edit-btn">
+                Edit
+            </a>
+            <a href="{% url 'delete_product' product.pk %}" class="delete-btn">
+                Delete
+            </a>
         </div>
     </div>
 </section>
