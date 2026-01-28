@@ -60,9 +60,13 @@ class ProductDetail(FormMixin,DetailView):
     # providing form class for product image
     form_class = ProductImageForm
 
-    # Overriding the queryset to pre-fetch and add the product images alongside products
+    # Overriding the queryset to pre-fetch 
+    # and add the product images alongside products
     def get_queryset(self):
         return Product.objects.prefetch_related('images')
+    
+
+    
     
 
     def get(self, request, *args, **kwargs):
