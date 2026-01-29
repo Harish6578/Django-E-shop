@@ -102,8 +102,7 @@ class EditProductImage(UpdateView):
     model = ProductImage
     template_name='products/image_edit.html'
     fields='__all__'
-    
-    
+      
     def get_success_url(self):
         return reverse('product_details', kwargs={'pk':self.object.product.pk})
     

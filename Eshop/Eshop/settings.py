@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # Apps
     'mainapp',
     'products',
+    'authentication',
    
 ]
 
@@ -140,3 +141,7 @@ STATICFILES_DIRS =[
 
 MEDIA_ROOT = BASE_DIR/'media'
 MEDIA_URL = '/'
+
+
+LOGIN_REDIRECT_URL ='/'
+LOGOUT_REDIRECT_URL ='/'

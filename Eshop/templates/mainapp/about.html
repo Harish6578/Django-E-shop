@@ -6,7 +6,49 @@ Home
 
 
 {% block content %}
-This is Harish About Home Page....!
-<br>
-Current Page: {{ current_page }}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>About Us</title>
+    <link rel="stylesheet" href="about.css">
+</head>
+<body>
+
+<section class="about-section">
+    <div class="about-container">
+
+        <h1 class="about-title">About Us</h1>
+        <p class="about-subtitle">
+            Learn more about who we are and what we do
+        </p>
+
+        <div class="about-content">
+            <div class="about-text">
+                <h2>Who We Are</h2>
+                <p>
+                    We are a passionate team focused on building high-quality products
+                    that make life easier and better. Our goal is to deliver simple,
+                    powerful, and user-friendly solutions.
+                </p>
+
+                <h2>Our Mission</h2>
+                <p>
+                    To provide reliable services and continuously improve through
+                    innovation, creativity, and dedication.
+                </p>
+            </div>
+
+            <div class="about-image">
+                <img src="https://via.placeholder.com/400" alt="About Image">
+            </div>
+        </div>
+
+    </div>
+</section>
+
+</body>
+</html>
+
 {% endblock %}p
