@@ -14,4 +14,4 @@ class CartItem(models.Model):
         unique_together = [['user','product']]
 
     def __str__(self):
-        return f"Product:{self.product.title.capitalize()}in {self.user.username.capitalize()}'s cart - Quality"
+        return f"Product:{self.product.title.capitalize()}in {self.user.username.capitalize()}'s cart - Quantity : {self.quantity}"
