@@ -18,16 +18,7 @@
     }
 }
 
-.productdetails {
-    .carousel-inner {
-        img {
-            height: 700px;
-            border-radius: 20px;
 
-        }
-    }
-
-}
 
 .carousel-buttons {
     position: absolute;
@@ -1144,4 +1135,13 @@
     .contact-box {
         flex-direction: column;
     }
+}
+ .carousel-inner{
+    
+    img{
+        aspect-ratio: 3/5;
+        height: 750px;
+        border-radius: 30px;
+        
+    } 
 }

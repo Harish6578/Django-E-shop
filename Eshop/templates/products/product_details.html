@@ -5,7 +5,7 @@ Product Details
 {% endblock %}
 
 {% block content %}
-<section class="d-flex row ">
+<section class="d-flex row  detail">
     <div class="col">
         <div id="carouselExample" class="carousel slide col" data-bs-ride="carousel">
             <div class="carousel-inner">
@@ -36,7 +36,7 @@ Product Details
         </div>
     </div>
     <div class="col productdetails">
-        <img src="{{product.thumbnail.url}}" class="w-75" alt="">
+        <img src="{{product.thumbnail.url}}" class="w-75 h-50" alt="">
         <h2>{{product.title}}</h2>
         <p>{{product.desc}}</p>
         <p>{{product.price}}</p>
@@ -48,7 +48,7 @@ Product Details
     </div>
 </section>
 
-<section class="m-5">
+<section class="Uploadbutton m-4">
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
