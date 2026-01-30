@@ -1,4 +1,3 @@
-
 {% extends 'base/base.html' %}
 
 {% block title %}
@@ -6,103 +5,54 @@ Product Details
 {% endblock %}
 
 {% block content %}
-
-<section class="d-flex row productdetails product-details-section">
-
-    <!-- LEFT : IMAGE CAROUSEL -->
-    <div class="col product-carousel-col">
-        <div id="carouselExample"
-             class="carousel slide position-relative product-carousel"
-             data-bs-ride="carousel">
-
-            <div class="carousel-inner product-carousel-inner">
+<section class="d-flex row ">
+    <div class="col">
+        <div id="carouselExample" class="carousel slide col" data-bs-ride="carousel">
+            <div class="carousel-inner">
                 {% for image in product.images.all %}
-                <div class="carousel-item product-carousel-item {% if forloop.counter == 1 %}active{% endif %}">
+                <div class="carousel-item {% if forloop.counter == 1 %}active{% endif %}">
 
-                    <!-- Edit / Delete buttons -->
                     <div class="carousel-buttons product-image-actions">
-                        <a href="{% url 'edit_prod_image' image.pk %}"
-                           class="btn btn-warning btn-sm image-edit-btn">
-                           Edit
+                        <a href="{% url 'edit_prod_image' image.pk %}" class="btn btn-warning ">
+                            Edit
                         </a>
-                        <a href="{% url 'del_prod_image' image.pk %}"
-                           class="btn btn-danger btn-sm image-delete-btn">
-                           Delete
-                        </a>
+                        <a href="{% url 'del_prod_image' image.pk %}" class="btn btn-danger ">
+                                Delete
+                            </a>
                     </div>
 
-                    <img src="{{ image.img.url }}"
-                         alt=""
-                         class="w-100 object-fit-cover product-carousel-image">
+                    <img src="{{image.img.url}}" alt="" class="w-100 object-fit-cover">
                 </div>
                 {% endfor %}
             </div>
-
-            <button class="carousel-control-prev product-carousel-prev"
-                    type="button"
-                    data-bs-target="#carouselExample"
-                    data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
             </button>
-
-            <button class="carousel-control-next product-carousel-next"
-                    type="button"
-                    data-bs-target="#carouselExample"
-                    data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
             </button>
         </div>
     </div>
-
-    <!-- RIGHT : PRODUCT DETAILS -->
-    <div class="col product-details-box product-info-col">
-
-        <img src="{{ product.thumbnail.url }}"
-             alt="{{ product.title }}"
-             class="product-details-image product-thumbnail">
-
-        <h2 class="product-details-title product-name">
-            {{ product.title }}
-        </h2>
-
-        <p class="product-details-desc product-description">
-            {{ product.desc }}
-        </p>
-
-        <p class="product-details-price product-price">
-            {{ product.price }}
-        </p>
-
-        <a href="#" class="add-to-cart-btn product-add-cart">
-            Add to Cart
-        </a>
-
-        <div class="product-action-buttons product-admin-actions">
-            <a href="{% url 'edit_product' product.pk %}"
-               class="edit-btn product-edit-btn">
-               Edit
-            </a>
-            <a href="{% url 'delete_product' product.pk %}"
-               class="delete-btn product-delete-btn">
-               Delete
-            </a>
+    <div class="col productdetails">
+        <img src="{{product.thumbnail.url}}" class="w-75" alt="">
+        <h2>{{product.title}}</h2>
+        <p>{{product.desc}}</p>
+        <p>{{product.price}}</p>
+        <a href="" class="btn btn-success">Add to Cart</a>
+        <div class="d-flex flex-row mt-3 mb-5">
+            <a href="{% url 'edit_product' product.pk %}" class="btn btn-primary">Edit</a>
+            <a href="{% url 'delete_product' product.pk %}" class="btn btn-danger">Delete</a>
         </div>
-
     </div>
 </section>
 
-<!-- IMAGE UPLOAD FORM -->
-<section class="mb-5 ms-5 product-image-upload-section">
-    <form method="post"
-          enctype="multipart/form-data"
-          class="product-image-upload-form">
+<section class="m-5">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit"
-                class="btn btn-outline-success upload-btn">
-            Upload
-        </button>
+        <button type="submit" class="btn btn-success">Upload</button>
     </form>
 </section>
-
 {% endblock %}

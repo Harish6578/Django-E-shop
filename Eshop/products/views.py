@@ -12,26 +12,28 @@ def productsView(request):
 
     return render(request,template_name=template,context=context)
 
-# Search product 
 
-from django.db.models import Q
+# Search product
+
+from django.db.models import Q 
 def searchProducts(request):
     template = 'products/search_results.html'
-    query = request.GET.get('query_text')
+    query= request.GET.get('query_text')
     if query:
-        search_results = Product.objects.filter(
+        search_result = Product.objects.filter(
             Q(title__icontains = query) |
             Q(desc__icontains = query)
         )
 
-        context = {
-            'query':query,
-            'products':search_results
+        context ={
+            'quert':query,
+            'products':search_result
         }
+    return render (request,template_name=template,context=context)
 
-    return render(request, template_name=template,context=context)
 
-from django.views.generic import (CreateView,DetailView,UpdateView,DeleteView)
+from django.views.generic import (CreateView,
+DetailView,UpdateView,DeleteView)
 
 
 class CreateProduct(CreateView):
@@ -40,50 +42,40 @@ class CreateProduct(CreateView):
     fields = '__all__'
     success_url = '/'
 
-
-class AddProductImage(CreateView):
-    model=Product
-    template_name='products/add_product.html'
-    fields='__all__'
-    #redirection url for successful creation of resourecs
-    success_url='/'
-
+    def get_success_url(self):
+        return reverse('product_details', kwargs={'pk':self.object.pk})
 
 from django.views.generic.edit import FormMixin
 # this mixin provides ability to render forms from the `from_class`
 from .forms import ProductImageForm
 
-class ProductDetail(FormMixin,DetailView):
-    model= Product
-    template_name='products/product_details.html'
+class ProductDetail( FormMixin ,DetailView):
+    model = Product
+    template_name = 'products/product_details.html'
     context_object_name = 'product'
     # providing form class for product image
     form_class = ProductImageForm
+     
+    #  overriding the quey\ryset to pre-fetch and 
+    #   the product images alongside produucts
 
     def get_success_url(self):
         return reverse('product_details', kwargs={'pk':self.object.pk})
     
-    # Overriding the queryset to pre-fetch 
-    # and add the product images alongside products
     def get_queryset(self):
         return Product.objects.prefetch_related('images')
     
-    def post(self,request,*args, **kwargs):
-        self.object = self.get_object()
-        form = self.get_form()
+    def post(self,request,*args,**kwargs):
+        self.object=self.get_object()
+        form =self.get_form()
 
         if form.is_valid():
-            image = form.save(commit=False)
-            image.product =self.object
+            image=form.save(commit=False)
+            image.product=self.object
             image.save()
             return redirect(self.get_success_url())
     
-    def get(self, request, *args, **kwargs):
-        context= super().get(request, *args, **kwargs)
-        context['adcd']= 'yuhooo'
 
-        return context
-    
 class UpdateProduct(UpdateView):
     model= Product
     template_name='products/update_product.html'
@@ -95,20 +87,22 @@ class DeleteProduct(DeleteView):
     template_name='products/delete_product.html'
     success_url= '/'
 
-    # Edit Product Image
+   # Edit Product Iamge
 from .models import ProductImage
 
 class EditProductImage(UpdateView):
     model = ProductImage
-    template_name='products/image_edit.html'
+    template_name= 'products/image_edit.html'
     fields='__all__'
-      
-    def get_success_url(self):
-        return reverse('product_details', kwargs={'pk':self.object.product.pk})
-    
-class DeleteProductImage(DeleteView):
-    model = ProductImage
-    template_name='products/image_del.html'
 
     def get_success_url(self):
-        return reverse('product_details', kwargs={'pk':self.object.product.pk})
+        return reverse('product_details',kwargs={'pk':self.object.product.pk})
+
+class DeleteProductImage(DeleteProduct):
+    model = ProductImage
+    template_name= 'products/image_del.html'
+
+    def get_success_url(self):
+        return reverse('product_details',kwargs={'pk':self.object.product.pk})
+
+
