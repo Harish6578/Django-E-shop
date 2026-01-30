@@ -54,27 +54,8 @@
     transition: transform 0.45s cubic-bezier(.21, 1, .21, 1);
 }
 
-/* Animated gradient border */
-.card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    padding: 1.5px;
-    border-radius: 18px;
-    background: linear-gradient(130deg,
-            #ff4ecd,
-            #5a4bff,
-            #00ffd5);
-    background-size: 300% 300%;
-    animation: borderFlow 6s linear infinite;
-    -webkit-mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-    z-index: 1;
-}
+
+
 
 @keyframes borderFlow {
     0% {
@@ -799,7 +780,7 @@
 }
 
 .product-edit-btn,
-.product-delete-btn {
+.product-delete-btn{
     flex: 1;
     text-align: center;
     padding: 0.6rem;
@@ -807,6 +788,7 @@
     font-weight: 600;
     text-decoration: none;
     transition: all 0.25s ease;
+    color: black;
 }
 
 .product-edit-btn {
@@ -819,13 +801,13 @@
 }
 
 .product-delete-btn {
-    background: #fee2e2;
+    background: #000000;
     color: #991b1b;
 }
 
 .product-delete-btn:hover {
     background: #ef4444;
-    color: #fff;
+    color: #0a0a0a;
 }
 
 /* =========================
