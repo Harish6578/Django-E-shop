@@ -1,0 +1,12 @@
+<section id="products-container" data-add-url="{% url 'add_to_cart' %}" >
+    <div class="row g-4 px-5 py-3 m-0">
+        {% for product in products %}
+        <!-- Products card -->
+        {% include 'products/includes/ProductCard.html' %}
+        {% empty %}
+        <div class="col-12 text-center noproduct">
+            <p class="text-muted">No products available.</p>
+        </div>
+        {% endfor %}
+    </div>
+</section>
